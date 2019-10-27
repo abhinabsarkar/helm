@@ -4,7 +4,7 @@ In this article, we are going to deploy an application on kubernetes docker desk
 Refer the following for:
 * [Helm Architecture](/architecture/helm-readme.md)
 * [Install instrunctions & software versions used in this article](/install/readme.md)
-* [Dockerized Python application used in this article](/src/hello-py/hello-py-readme.md)
+* [Dockerized Python application used in this article](/src/hello-py/readme.md)
 
 ## Helm Chart Structure
 With the create command, Helm provides a predetermined structure to ensure a standard (similar to Ansible). These files are auto-generated. Helm uses YAML format for configuration files.
