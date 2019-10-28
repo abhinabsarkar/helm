@@ -38,7 +38,6 @@ Type values and their behaviors are:
 * LoadBalancer: Exposes the Service externally using a cloud provider’s load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
 
   ![Alt text](/images/service-type.jpg)
-
 > You can also use Ingress to expose your Service. Ingress is not a Service type, but it acts as the entry point for your cluster. It lets you consolidate your routing rules into a single resource as it can expose multiple services under the same IP address.
 
 ```yaml
