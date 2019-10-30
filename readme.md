@@ -31,15 +31,6 @@ helm create hello-helm-chart
 
 Make the following changes in values.yaml for image and service resources. The complete values.yaml can be seen [here](/src/hello-helm-chart/values.yaml). Note that the port 5000 is used because that's the port exposed in the hello-py container. Kubernetes ServiceTypes allow you to specify what kind of Service you want. The default is ClusterIP.
 
-Type values and their behaviors are:
-
-* ClusterIP: Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
-* NodePort: Exposes the Service on each Node’s IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created. You’ll be able to contact the NodePort Service, from outside the cluster, by requesting http://<Node_IP>:<Node_Port>
-* LoadBalancer: Exposes the Service externally using a cloud provider’s load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
-
-  ![Alt text](/images/service-type.jpg)
-> You can also use Ingress to expose your Service. Ingress is not a Service type, but it acts as the entry point for your cluster. It lets you consolidate your routing rules into a single resource as it can expose multiple services under the same IP address.
-
 ```yaml
 replicaCount: 3
 
@@ -51,6 +42,20 @@ service:
   type: LoadBalancer
   port: 80
   targetPort: 5000 
+```
+
+Type values and their behaviors are:
+
+* ClusterIP: Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
+* NodePort: Exposes the Service on each Node’s IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created. You’ll be able to contact the NodePort Service, from outside the cluster, by requesting http://<Node_IP>:<Node_Port>
+* LoadBalancer: Exposes the Service externally using a cloud provider’s load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
+
+  ![Alt text](/images/service-type.jpg)
+> You can also use Ingress to expose your Service. Ingress is not a Service type, but it acts as the entry point for your cluster. It lets you consolidate your routing rules into a single resource as it can expose multiple services under the same IP address.
+
+Make the following changes in the service.yaml under the template folder
+```yaml
+      targetPort: {{ .Values.service.targetPort }}
 ```
 
 Make the following change in deployment.yaml since the container port exposed is 5000 in the python application
